@@ -1,0 +1,4 @@
+# Ignore Python compiled bytecode
+**/__pycache__/
+__*
+
