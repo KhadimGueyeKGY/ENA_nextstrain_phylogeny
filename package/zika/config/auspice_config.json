@@ -3,6 +3,12 @@
   "maintainers": [
     {"name": "EMBL-EBI ENA team", "url": "https://www.insdc.org/"}
   ],
+  "data_provenance": [
+    {
+      "name": "INSDC",
+      "url": "https://www.pathogensportal.org/"
+    }
+  ],
   "build_url": "https://gitlab.ebi.ac.uk/ena-dcap/pathogen-phylogeny-monkeypox/",
   "colorings": [
     {

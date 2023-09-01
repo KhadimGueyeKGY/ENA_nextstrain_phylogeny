@@ -3,7 +3,7 @@
 countries=();
 while IFS="" read -r line; do
   countries+=( "$line" );
-done < <( grep '>' data/west-nile.fasta | cut -d'|' -f 6 | sort | uniq );
+done < <( grep '>' data/monkeypox.fasta | cut -d'|' -f 6 | sort | uniq );
 
 for i in "${countries[@]}"; do
   j=${i//_/ }

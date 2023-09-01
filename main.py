@@ -13,14 +13,22 @@ def pathogens ():
             pathogens = yaml.safe_load(file)
             West_Nile_virus = str(pathogens['West Nile virus'])
             Zika = str(pathogens['Zika'])
-            return West_Nile_virus , Zika
+            monkeypox = str(pathogens['Monkeypox'])
+            return West_Nile_virus , Zika , monkeypox
     except FileNotFoundError:
         sys.exit()
 
 
 def main():
-    West_Nile_virus , Zika = pathogens ()
+    West_Nile_virus , Zika , monkeypox  = pathogens ()
     #os.system('mkdir -p data/West_Nile_virus data/Zika')
+    
+    #----------------- monkeypox ----------------------
+    DownData.downdata(monkeypox, 'data/Monkeypox')
+    DownData.metadata_prep('data/Monkeypox/','package/monkeypox/data/','monkeypox')
+    DownData.fataprep ('data/Monkeypox/','package/monkeypox/data/')
+    nextstrain.precess('package/monkeypox/')
+
     
     #----------------- West_Nile_virus ----------------------
     DownData.downdata(West_Nile_virus, 'data/West_Nile_virus')

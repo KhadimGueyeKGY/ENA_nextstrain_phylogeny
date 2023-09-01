@@ -1,0 +1,129 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	align
+	1	all
+	1	ancestral
+	1	export
+	1	filter
+	1	refine
+	1	traits
+	1	translate
+	1	tree
+	9
+
+[Fri Sep  1 17:52:46 2023]
+rule filter:
+    input: data/sequences.fasta, data/metadata.tsv
+    output: results/filtered.fasta
+    jobid: 8
+
+
+        augur filter             --sequences data/sequences.fasta             --metadata data/metadata.tsv             --output results/filtered.fasta             --group-by country year month             --sequences-per-group 40             --min-length 5481
+        
+[Fri Sep  1 17:52:48 2023]
+Finished job 8.
+1 of 9 steps (11%) done
+
+[Fri Sep  1 17:52:48 2023]
+rule align:
+    input: results/filtered.fasta, config/west_nile_reference.gb
+    output: results/aligned.fasta
+    jobid: 7
+
+
+        augur align             --sequences results/filtered.fasta             --reference-sequence config/west_nile_reference.gb             --output results/aligned.fasta             --fill-gaps             --remove-reference
+        
+[Fri Sep  1 17:52:53 2023]
+Finished job 7.
+2 of 9 steps (22%) done
+
+[Fri Sep  1 17:52:53 2023]
+rule tree:
+    input: results/aligned.fasta
+    output: results/tree_raw.nwk
+    jobid: 6
+
+
+        augur tree             --alignment results/aligned.fasta             --output results/tree_raw.nwk
+        
+[Fri Sep  1 17:52:56 2023]
+Finished job 6.
+3 of 9 steps (33%) done
+
+[Fri Sep  1 17:52:56 2023]
+rule refine:
+    input: results/tree_raw.nwk, results/aligned.fasta, data/metadata.tsv
+    output: results/tree.nwk, results/branch_lengths.json
+    jobid: 2
+
+
+        augur refine             --tree results/tree_raw.nwk             --alignment results/aligned.fasta             --metadata data/metadata.tsv             --output-tree results/tree.nwk             --output-node-data results/branch_lengths.json             --timetree             --coalescent opt             --date-confidence             --date-inference marginal             --clock-filter-iqd 4
+        
+[Fri Sep  1 17:53:11 2023]
+Finished job 2.
+4 of 9 steps (44%) done
+
+[Fri Sep  1 17:53:11 2023]
+rule ancestral:
+    input: results/tree.nwk, results/aligned.fasta
+    output: results/nt_muts.json
+    jobid: 4
+
+
+        augur ancestral             --tree results/tree.nwk             --alignment results/aligned.fasta             --output-node-data results/nt_muts.json             --inference joint
+        
+[Fri Sep  1 17:53:13 2023]
+Finished job 4.
+5 of 9 steps (56%) done
+
+[Fri Sep  1 17:53:13 2023]
+rule translate:
+    input: results/tree.nwk, results/nt_muts.json, config/west_nile_reference.gb
+    output: results/aa_muts.json
+    jobid: 5
+
+
+        augur translate             --tree results/tree.nwk             --ancestral-sequences results/nt_muts.json             --reference-sequence config/west_nile_reference.gb             --output results/aa_muts.json         
+[Fri Sep  1 17:53:16 2023]
+Finished job 5.
+6 of 9 steps (67%) done
+
+[Fri Sep  1 17:53:16 2023]
+rule traits:
+    input: results/tree.nwk, data/metadata.tsv
+    output: results/traits.json
+    jobid: 3
+
+
+        augur traits             --tree results/tree.nwk             --metadata data/metadata.tsv             --output results/traits.json             --columns region country             --confidence             --sampling-bias-correction 3
+        
+[Fri Sep  1 17:53:18 2023]
+Finished job 3.
+7 of 9 steps (78%) done
+
+[Fri Sep  1 17:53:18 2023]
+rule export:
+    input: results/tree.nwk, data/metadata.tsv, results/branch_lengths.json, results/traits.json, results/nt_muts.json, results/aa_muts.json, config/colors.tsv, config/auspice_config.json, config/description.md
+    output: auspice/ena_nextstrain_phylogeny_west-nile.json
+    jobid: 1
+
+
+        augur export v2             --tree results/tree.nwk             --metadata data/metadata.tsv             --node-data results/branch_lengths.json results/traits.json results/nt_muts.json results/aa_muts.json             --colors config/colors.tsv             --auspice-config config/auspice_config.json             --description config/description.md             --include-root-sequence             --output auspice/ena_nextstrain_phylogeny_west-nile.json
+        
+[Fri Sep  1 17:53:20 2023]
+Finished job 1.
+8 of 9 steps (89%) done
+
+[Fri Sep  1 17:53:20 2023]
+localrule all:
+    input: auspice/ena_nextstrain_phylogeny_west-nile.json
+    jobid: 0
+
+[Fri Sep  1 17:53:20 2023]
+Finished job 0.
+9 of 9 steps (100%) done
+Complete log: /nextstrain/build/.snakemake/log/2023-09-01T175246.229441.snakemake.log

@@ -23,7 +23,7 @@ class DownData:
             'query=tax_tree('+str(taxon)+')',
             '&',
             'result=' + DownData.ena_searches["result_type"],
-            '&format=tsv&limit=0' 
+            '&format=tsv&limit=0'  
         ])
         return url
     

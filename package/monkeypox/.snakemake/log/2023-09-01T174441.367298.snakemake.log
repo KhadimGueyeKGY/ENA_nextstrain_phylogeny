@@ -1,0 +1,2 @@
+SyntaxError in line 32 of /nextstrain/build/Snakefile:
+positional argument follows keyword argument
