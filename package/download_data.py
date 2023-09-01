@@ -6,13 +6,9 @@ from datetime import datetime
 class DownData:
     BASE_PORTAL_API_SEARCH_URL = 'https://www.ebi.ac.uk/ena/portal/api/search'
     BASE_PORTAL_API_SEARCH_FASTA = 'https://www.ebi.ac.uk/ena/browser/api/fasta/'
-    '''ena_searches = {
-       'search_fields': ['country', 'collection_date','isolate'], 'result_type': 'sequence', 'data_portal': 'ena' , 'result_type': 'sequence'
-        }'''
     ena_searches = {
-    'search_fields': ['country', 'collection_date', 'host', 'strain', 'isolate', 'first_public', 'collected_by'], 'result_type': 'sequence', 'data_portal': 'ena'
-    }
-    
+       'search_fields': ['country', 'collection_date','isolate','collected_by'], 'result_type': 'sequence', 'data_portal': 'ena' , 'result_type': 'sequence'
+        }
     # &format=tsv
     def __init__(self):
         pass
@@ -27,13 +23,12 @@ class DownData:
             'query=tax_tree('+str(taxon)+')',
             '&',
             'result=' + DownData.ena_searches["result_type"],
-            '&format=tsv&limit=100' # ---------------------------------- a modifié apres
+            '&format=tsv&limit=0' 
         ])
         return url
     
     def downdata(taxon, output):
         url = DownData.get_url(taxon)
-        print (url)
         response = requests.get(url)
         data = pd.read_csv(io.StringIO(response.content.decode('UTF-8')), sep="\t", low_memory=False)
         data.to_csv(output+'/metadata.tsv', sep="\t", index=False)
@@ -114,6 +109,9 @@ class DownData:
                 accession = str(data.at[i, 'accession'])
                 #isolate = str(data.at[i, 'isolate'])
                 collection_date = str(data.at[i, 'collection_date'])
+                authors = str(data.at[i, 'collected_by'])
+                if authors == 'nan':
+                    authors = '-'
                 converted_dates = DownData.convert_date(collection_date)
 
                 #if isolate == 'nan':
@@ -133,7 +131,7 @@ class DownData:
                     city = '?'
 
                 formatted_line = (
-                    f'{isolate}\t{virus}\t{accession}\t{converted_dates}\t{region}\t{ctry}\t{division}\t{city}\tENA\tgenome\t?\t'
+                    f'{isolate}\t{virus}\t{accession}\t{converted_dates}\t{region}\t{ctry}\t{division}\t{city}\tENA\tgenome\t{authors}\t'
                     f'https://www.ebi.ac.uk/ena/browser/view/{accession}\t?\t?\t?\n'
                 )
                 output.write(formatted_line)

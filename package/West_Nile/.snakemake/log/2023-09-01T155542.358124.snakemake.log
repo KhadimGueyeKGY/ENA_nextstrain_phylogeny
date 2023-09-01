@@ -1,0 +1,77 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	align
+	1	all
+	1	ancestral
+	1	export
+	1	filter
+	1	refine
+	1	traits
+	1	translate
+	1	tree
+	9
+
+[Fri Sep  1 15:55:42 2023]
+rule filter:
+    input: data/sequences.fasta, data/metadata.tsv
+    output: results/filtered.fasta
+    jobid: 8
+
+
+        augur filter             --sequences data/sequences.fasta             --metadata data/metadata.tsv             --output results/filtered.fasta             --group-by country year month             --sequences-per-group 40             --min-length 5481
+        
+[Fri Sep  1 15:55:45 2023]
+Finished job 8.
+1 of 9 steps (11%) done
+
+[Fri Sep  1 15:55:45 2023]
+rule align:
+    input: results/filtered.fasta, config/west_nile_reference.gb
+    output: results/aligned.fasta
+    jobid: 7
+
+
+        augur align             --sequences results/filtered.fasta             --reference-sequence config/west_nile_reference.gb             --output results/aligned.fasta             --fill-gaps             --remove-reference
+        
+[Fri Sep  1 15:55:50 2023]
+Finished job 7.
+2 of 9 steps (22%) done
+
+[Fri Sep  1 15:55:50 2023]
+rule tree:
+    input: results/aligned.fasta
+    output: results/tree_raw.nwk
+    jobid: 6
+
+
+        augur tree             --alignment results/aligned.fasta             --output results/tree_raw.nwk
+        
+[Fri Sep  1 15:55:53 2023]
+Finished job 6.
+3 of 9 steps (33%) done
+
+[Fri Sep  1 15:55:53 2023]
+rule refine:
+    input: results/tree_raw.nwk, results/aligned.fasta, data/metadata.tsv
+    output: results/tree.nwk, results/branch_lengths.json
+    jobid: 2
+
+
+        augur refine             --tree results/tree_raw.nwk             --alignment results/aligned.fasta             --metadata data/metadata.tsv             --output-tree results/tree.nwk             --output-node-data results/branch_lengths.json             --timetree             --coalescent opt             --date-confidence             --date-inference marginal             --clock-filter-iqd 4
+        
+Terminating processes on user request, this might take some time.
+[Fri Sep  1 15:55:58 2023]
+Error in rule refine:
+    jobid: 2
+    output: results/tree.nwk, results/branch_lengths.json
+    shell:
+        
+        augur refine             --tree results/tree_raw.nwk             --alignment results/aligned.fasta             --metadata data/metadata.tsv             --output-tree results/tree.nwk             --output-node-data results/branch_lengths.json             --timetree             --coalescent opt             --date-confidence             --date-inference marginal             --clock-filter-iqd 4
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Complete log: /nextstrain/build/.snakemake/log/2023-09-01T155542.358124.snakemake.log

@@ -2,3 +2,9 @@
 **/__pycache__/
 __*
 
+
+data/
+**/data/
+
+**/auspice
+**/results

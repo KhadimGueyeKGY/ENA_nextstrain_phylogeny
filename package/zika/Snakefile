@@ -1,6 +1,6 @@
 rule all:
     input:
-        auspice_json = "auspice/zika.json",
+        auspice_json = "auspice/ena_nextstrain_phylogeny_zika.json",
 
 rule files:
     params:

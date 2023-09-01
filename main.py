@@ -23,17 +23,17 @@ def main():
     #os.system('mkdir -p data/West_Nile_virus data/Zika')
     
     #----------------- West_Nile_virus ----------------------
-    #DownData.downdata(West_Nile_virus, 'data/West_Nile_virus')
-    #DownData.metadata_prep('data/West_Nile_virus/','package/West_Nile/data/','west nile')
-    #DownData.fataprep ('data/West_Nile_virus/','package/West_Nile/data/')
-    #nextstrain.precess('package/West_Nile/')
+    DownData.downdata(West_Nile_virus, 'data/West_Nile_virus')
+    DownData.metadata_prep('data/West_Nile_virus/','package/West_Nile/data/','west nile')
+    DownData.fataprep ('data/West_Nile_virus/','package/West_Nile/data/')
+    nextstrain.precess('package/West_Nile/')
 
 
     #----------------------- Zika --------------------------
     DownData.downdata(Zika, 'data/Zika')
-    #DownData.metadata_prep('data/Zika/','package/zika/data/','zika')
-    #DownData.fataprep ('data/Zika/','package/zika/data/')
-    #nextstrain.precess('package/zika')
+    DownData.metadata_prep('data/Zika/','package/zika/data/','zika')
+    DownData.fataprep ('data/Zika/','package/zika/data/')
+    nextstrain.precess('package/zika')
 
 
     #----------------------------- view 

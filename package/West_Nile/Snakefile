@@ -1,6 +1,6 @@
 rule all:
     input:
-        auspice_json = "auspice/west_nile.json",
+        auspice_json = "auspice/ena_nextstrain_phylogeny_west-nile.json",
 
 rule files:
     params:
