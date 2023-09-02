@@ -4,6 +4,7 @@ import yaml
 import sys , os
 from package.download_data import DownData
 from package.nextstrain import nextstrain
+import logging
 
 
 
@@ -19,29 +20,29 @@ def pathogens ():
         sys.exit()
 
 
+def process_virus(virus, data_dir, package_dir, virus_name):
+    try:
+        DownData.downdata(virus, data_dir)
+        DownData.metadata_prep(data_dir, package_dir + 'data/', virus_name)
+        DownData.fataprep(data_dir, package_dir + 'data/')
+        nextstrain.precess(package_dir)
+    except Exception as ex:
+        logging.error(f'Exception for {virus_name}: {ex}')
+
 def main():
-    West_Nile_virus , Zika , monkeypox  = pathogens ()
-    #os.system('mkdir -p data/West_Nile_virus data/Zika')
-    
-    #----------------- monkeypox ----------------------
-    DownData.downdata(monkeypox, 'data/Monkeypox')
-    DownData.metadata_prep('data/Monkeypox/','package/monkeypox/data/','monkeypox')
-    DownData.fataprep ('data/Monkeypox/','package/monkeypox/data/')
-    nextstrain.precess('package/monkeypox/')
+    West_Nile_virus, Zika, monkeypox = pathogens()
 
-    
-    #----------------- West_Nile_virus ----------------------
-    DownData.downdata(West_Nile_virus, 'data/West_Nile_virus')
-    DownData.metadata_prep('data/West_Nile_virus/','package/West_Nile/data/','west nile')
-    DownData.fataprep ('data/West_Nile_virus/','package/West_Nile/data/')
-    nextstrain.precess('package/West_Nile/')
+    # output log configuration
+    logging.basicConfig(filename='output.log', level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
 
+    viruses = {
+        'monkeypox': (monkeypox, 'data/Monkeypox', 'package/monkeypox/'),
+        'west nile': (West_Nile_virus, 'data/West_Nile_virus', 'package/West_Nile/'),
+        'zika': (Zika, 'data/Zika', 'package/zika/')
+    }
 
-    #----------------------- Zika --------------------------
-    DownData.downdata(Zika, 'data/Zika')
-    DownData.metadata_prep('data/Zika/','package/zika/data/','zika')
-    DownData.fataprep ('data/Zika/','package/zika/data/')
-    nextstrain.precess('package/zika')
+    for virus_name, (virus, data_dir, package_dir) in viruses.items():
+        process_virus(virus, data_dir, package_dir, virus_name)
 
 
     #----------------------------- view 
@@ -49,6 +50,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
 
