@@ -35,7 +35,7 @@ def main():
     # output log configuration
     logging.basicConfig(filename='output.log', level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
 
-    viruses = {
+    viruses = {        
         'monkeypox': (monkeypox, 'data/Monkeypox', 'package/monkeypox/'),
         'west nile': (West_Nile_virus, 'data/West_Nile_virus', 'package/West_Nile/'),
         'zika': (Zika, 'data/Zika', 'package/zika/')
