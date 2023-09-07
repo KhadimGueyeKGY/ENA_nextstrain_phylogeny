@@ -7,7 +7,7 @@ class DownData:
     BASE_PORTAL_API_SEARCH_URL = 'https://www.ebi.ac.uk/ena/portal/api/search'
     BASE_PORTAL_API_SEARCH_FASTA = 'https://www.ebi.ac.uk/ena/browser/api/fasta/'
     ena_searches = {
-       'search_fields': ['country', 'collection_date','isolate','collected_by'], 'result_type': 'sequence', 'data_portal': 'ena' , 'result_type': 'sequence'
+       'search_fields': ['country', 'collection_date','isolate','collected_by','first_public','host'], 'result_type': 'sequence', 'data_portal': 'ena' , 'result_type': 'sequence'
         }
     # &format=tsv
     def __init__(self):
@@ -23,7 +23,7 @@ class DownData:
             'query=tax_tree('+str(taxon)+')',
             '&',
             'result=' + DownData.ena_searches["result_type"],
-            '&format=tsv&limit=0'  
+            '&format=tsv&limit=0'   
         ])
         return url
     
@@ -102,39 +102,74 @@ class DownData:
         data = pd.read_csv(input_dir+'/metadata.tsv', sep='\t')
 
         with open(output_dir+'/metadata.tsv', 'w') as output:
-            output.write('strain\tvirus\taccession\tdate\tregion\tcountry\tdivision\tcity\tdb\tsegment\tauthors\turl\ttitle\tjournal\tpaper_url\n')
-
-            for i in range(len(data)):
-                country = str(data.at[i, 'country'])
-                accession = str(data.at[i, 'accession'])
-                #isolate = str(data.at[i, 'isolate'])
-                collection_date = str(data.at[i, 'collection_date'])
-                authors = str(data.at[i, 'collected_by'])
-                if authors == 'nan':
-                    authors = '-'
-                converted_dates = DownData.convert_date(collection_date)
-
-                #if isolate == 'nan':
-                isolate = accession 
-
-                if ':' in country:
-                    region, ctry = DownData.contry_to_continent(country.split(':')[0])
-                    division = country.split(':')[1]
-                    if ',' in division:
-                        city = division.split(',')[1]
-                        division = country.split(',')[1]
+            if virus== 'monkeypox':
+                output.write('accession\tgenbank_accession_rev\tstrain\tdate\tregion\tcountry\tdivision\tlocation\thost\tdate_submitted\tsra_accession\tabbr_authors\treverse\tclade\tlineage\tmissing_data\tdivergence\tnonACGTN\tQC_missing_data\tQC_mixed_sites\tQC_rare_mutations\tQC_frame_shifts\tQC_stop_codons\tframe_shifts\tauthors\tinstitution\n')
+                for i in range(len(data)):
+                    country = str(data.at[i, 'country'])
+                    if country == 'nan':
+                      country ='' 
+                    accession = str(data.at[i, 'accession'])
+                    collection_date = str(data.at[i, 'collection_date'])
+                    converted_dates = DownData.convert_date(collection_date)
+                    authors = str(data.at[i, 'collected_by'])
+                    if authors == 'nan':
+                        authors = '-'
+                    first_public = str(data.at[i, 'first_public'])
+                    host = str(data.at[i, 'host'])
+                    if host == 'nan':
+                        host = '-'
+                    first_public = DownData.convert_date(first_public)
+                    isolate = accession
+                    if ':' in country:
+                        region, ctry = DownData.contry_to_continent(country.split(':')[0])
+                        division = country.split(':')[1]
+                        if ',' in division:
+                            city = division.split(',')[1]
+                            division = country.split(',')[1]
+                        else:
+                            city = '?'
                     else:
+                        region, ctry = DownData.contry_to_continent(country)
+                        division = '?'
+                        ctry = '?'
                         city = '?'
-                else:
-                    region, ctry = DownData.contry_to_continent(country)
-                    division = '?'
-                    city = '?'
 
-                formatted_line = (
-                    f'{isolate}\t{virus}\t{accession}\t{converted_dates}\t{region}\t{ctry}\t{division}\t{city}\tENA\tgenome\t{authors}\t'
-                    f'https://www.ebi.ac.uk/ena/browser/view/{accession}\t?\t?\t?\n'
-                )
-                output.write(formatted_line)
+                    formatted_line = (f'{accession}\t{accession}.1\t{accession}\t{converted_dates}\t{region}\t{ctry}\t{division}\t{city}\t{host}\t{first_public}\t{accession}\t\t\t\t\t\t\t\t\t\t\t\t\t\t{authors}\t\n')
+                    output.write(formatted_line)
+            
+            else : 
+                output.write('strain\tvirus\taccession\tdate\tregion\tcountry\tdivision\tcity\tdb\tsegment\tauthors\turl\ttitle\tjournal\tpaper_url\n')
+                for i in range(len(data)):
+                    country = str(data.at[i, 'country'])
+                    accession = str(data.at[i, 'accession'])
+                    #isolate = str(data.at[i, 'isolate'])
+                    collection_date = str(data.at[i, 'collection_date'])
+                    authors = str(data.at[i, 'collected_by'])
+                    if authors == 'nan':
+                        authors = '-'
+                    converted_dates = DownData.convert_date(collection_date)
+
+                    #if isolate == 'nan':
+                    isolate = accession 
+
+                    if ':' in country:
+                        region, ctry = DownData.contry_to_continent(country.split(':')[0])
+                        division = country.split(':')[1]
+                        if ',' in division:
+                            city = division.split(',')[1]
+                            division = country.split(',')[1]
+                        else:
+                            city = '?'
+                    else:
+                        region, ctry = DownData.contry_to_continent(country)
+                        division = '?'
+                        city = '?'
+
+                    formatted_line = (
+                        f'{isolate}\t{virus}\t{accession}\t{converted_dates}\t{region}\t{ctry}\t{division}\t{city}\tENA\tgenome\t{authors}\t'
+                        f'https://www.ebi.ac.uk/ena/browser/view/{accession}\t?\t?\t?\n'
+                    )
+                    output.write(formatted_line)
 
 
 

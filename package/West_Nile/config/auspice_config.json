@@ -9,7 +9,7 @@
       "url": "https://www.pathogensportal.org/"
     }
   ],
-  "build_url": "https://gitlab.ebi.ac.uk/ena-dcap/pathogen-phylogeny-monkeypox/",
+  "build_url": "https://gitlab.ebi.ac.uk/ena-dcap/pathogen-phylogeny-monkeypox",
   "colorings": [
     {
       "key": "gt",

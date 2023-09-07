@@ -1,0 +1,210 @@
+region	Africa	#8ABB6A
+region	Asia	#447CCD
+region	Europe	#BEBB48
+region	North America	#E2562B
+region	Oceania	#5EA9A1
+region	South America	#E29E39
+
+recency	Older	#447CCD
+recency	One month ago	#5EA9A1
+recency	One week ago	#8ABB6A
+recency	3-7 days ago	#BEBB48
+recency	1-2 days ago	#E29E39
+recency	New	#E2562B
+
+country	afghanistan	#FF5733
+country	albania	#FF6633
+country	algeria	#FF7538
+country	andorra	#FF8333
+country	angola	#FF8E38
+country	antigua and barbuda	#FF9C33
+country	argentina	#FFA833
+country	armenia	#FFB733
+country	australia	#FFC633
+country	austria	#FFD533
+country	azerbaijan	#FFE433
+country	bahamas	#FFF233
+country	bahrain	#F2FF33
+country	bangladesh	#E5FF33
+country	barbados	#D8FF33
+country	belarus	#CBFF33
+country	belgium	#BEFF33
+country	belize	#B1FF33
+country	benin	#A4FF33
+country	bhutan	#97FF33
+country	bolivia	#8AFF33
+country	bosnia and herzegovina	#7DFF33
+country	botswana	#70FF33
+country	brazil	#63FF33
+country	brunei	#56FF33
+country	bulgaria	#49FF33
+country	burkina	#3CFF33
+country	burundi	#33FF3C
+country	cambodia	#33FF49
+country	cameroon	#33FF56
+country	canada	#33FF63
+country	cape verde	#33FF70
+country	central african republic	#33FF7D
+country	chad	#33FF8A
+country	chile	#33FF97
+country	china	#33FFA4
+country	colombia	#33FFB1
+country	comoros	#33FFBE
+country	congo	#33FFCB
+country	costa rica	#33FFD8
+country	cote d'ivoire	#33FFE5
+country	croatia	#33FFF2
+country	cuba	#33F2FF
+country	cyprus	#33E5FF
+country	czech republic	#33D8FF
+country	democratic republic of the congo	#33CBFF
+country	denmark	#33BEFF
+country	djibouti	#33B1FF
+country	dominica	#33A4FF
+country	dominican republic	#3397FF
+country	east timor	#338AFF
+country	ecuador	#337DFF
+country	egypt	#3370FF
+country	el salvador	#3363FF
+country	equatorial guinea	#3356FF
+country	eritrea	#3349FF
+country	estonia	#333CFF
+country	ethiopia	#3C33FF
+country	fiji	#4933FF
+country	finland	#5633FF
+country	france	#6333FF
+country	gabon	#7033FF
+country	gambia	#7D33FF
+country	georgia	#8A33FF
+country	germany	#9733FF
+country	ghana	#A433FF
+country	greece	#B133FF
+country	grenada	#BE33FF
+country	guatemala	#CB33FF
+country	guinea	#D833FF
+country	guinea-bissau	#E533FF
+country	guyana	#F233FF
+country	haiti	#FF33F2
+country	honduras	#FF33E5
+country	hungary	#FF33D8
+country	iceland	#FF33CB
+country	india	#FF33BE
+country	indonesia	#FF33B1
+country	iran	#FF3397
+country	iraq	#FF338A
+country	ireland	#FF337D
+country	israel	#FF3370
+country	italy	#FF3363
+country	jamaica	#FF3356
+country	japan	#FF3349
+country	jordan	#FF333C
+country	kazakhstan	#FF4333
+country	kenya	#FF5033
+country	kiribati	#FF5D33
+country	korea, north	#FF6A33
+country	korea, south	#FF7733
+country	kuwait	#FF8433
+country	kyrgyzstan	#FF9133
+country	laos	#FF9E33
+country	latvia	#FFAB33
+country	lebanon	#FFB833
+country	lesotho	#FFC533
+country	liberia	#FFD233
+country	libya	#FFDF33
+country	liechtenstein	#FFEC33
+country	lithuania	#FFF933
+country	luxembourg	#F2FF33
+country	macedonia	#E5FF33
+country	madagascar	#D8FF33
+country	malawi	#CBFF33
+country	malaysia	#BEFF33
+country	maldives	#B1FF33
+country	mali	#A4FF33
+country	malta	#97FF33
+country	marshall islands	#8AFF33
+country	mauritania	#7DFF33
+country	mauritius	#70FF33
+country	mexico	#63FF33
+country	micronesia	#56FF33
+country	moldova	#49FF33
+country	monaco	#3CFF33
+country	mongolia	#33FF3C
+country	montenegro	#33FF49
+country	morocco	#33FF56
+country	mozambique	#33FF63
+country	myanmar	#33FF70
+country	namibia	#33FF7D
+country	nauru	#33FF8A
+country	nepal	#33FF97
+country	netherlands	#33FFA4
+country	new zealand	#33FFB1
+country	nicaragua	#33FFBE
+country	niger	#33FFCB
+country	nigeria	#33FFD8
+country	north america	#33FFE5
+country	norway	#33FFF2
+country	oman	#3CF2FF
+country	pakistan	#49E5FF
+country	palau	#56D8FF
+country	panama	#63CBFF
+country	papua new guinea	#70BEFF
+country	paraguay	#7DAFF
+country	peru	#84FF33
+country	philippines	#91FF33
+country	poland	#9EFF33
+country	portugal	#ABFF33
+country	qatar	#B8FF33
+country	romania	#C5FF33
+country	russia	#D2FF33
+country	rwanda	#DFFF33
+country	saint kitts and nevis	#ECFF33
+country	saint lucia	#F9FF33
+country	saint vincent and the grenadines	#FFF233
+country	samoa	#FFEC33
+country	san marino	#FFD233
+country	sao tome and principe	#FFC533
+country	saudi arabia	#FFB833
+country	senegal	#FFAB33
+country	serbia	#FF9E33
+country	seychelles	#FF9133
+country	sierra leone	#FF8433
+country	singapore	#FF7733
+country	slovakia	#FF6A33
+country	slovenia	#FF5D33
+country	solomon islands	#FF5033
+country	somalia	#FF4333
+country	south africa	#FFA500
+country	south sudan	#FFA600
+country	spain	#FFA700
+country	sri lanka	#FFA800
+country	sudan	#FFA900
+country	suriname	#FFAA00
+country	swaziland	#FFAB00
+country	sweden	#FFAC00
+country	switzerland	#FFAD00
+country	syria	#FFAE00
+country	taiwan	#FFAF00
+country	tajikistan	#FFB000
+country	tanzania	#FFB100
+country	thailand	#FFB200
+country	togo	#FFB300
+country	tonga	#FFB400
+country	trinidad and tobago	#FFB500
+country	tunisia	#FFB600
+country	turkey	#FFB700
+country	turkmenistan	#FFB800
+country	uganda	#FFB900
+country	ukraine	#FFBA00
+country	united arab emirates	#FFBB00
+country	united kingdom	#FFBC00
+country	united states (usa)	#FFBD00
+country	uruguay	#FFBE00
+country	uzbekistan	#FFBF00
+country	vanuatu	#FFC000
+country	vatican city	#FFC100
+country	venezuela	#FFC200
+country	vietnam	#FFC300
+country	yemen	#FFC400
+country	zambia	#FFC500
+country	zimbabwe	#FFC600
+
