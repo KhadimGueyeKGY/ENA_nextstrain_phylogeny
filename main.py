@@ -22,7 +22,7 @@ def pathogens ():
 
 def process_virus(virus, data_dir, package_dir, virus_name):
     try:
-        #DownData.downdata(virus, data_dir)
+        DownData.downdata(virus, data_dir)
         DownData.metadata_prep(data_dir, package_dir + 'data/', virus_name)
         DownData.fataprep(data_dir, package_dir + 'data/')
         nextstrain.precess(package_dir,virus_name)
