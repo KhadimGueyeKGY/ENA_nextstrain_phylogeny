@@ -5,6 +5,7 @@ import sys , os
 from package.download_data import DownData
 from package.nextstrain import nextstrain
 import logging
+import concurrent.futures
 
 
 
@@ -40,9 +41,13 @@ def main():
         'west nile': (West_Nile_virus, 'data/West_Nile_virus', 'package/West_Nile/'),
         'zika': (Zika, 'data/Zika', 'package/zika/')
     }
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        futures = []
+        for virus_name, (virus, data_dir, package_dir) in viruses.items():
+            futures.append(executor.submit(process_virus, virus, data_dir, package_dir, virus_name))
 
-    for virus_name, (virus, data_dir, package_dir) in viruses.items():
-        process_virus(virus, data_dir, package_dir, virus_name)
+        # Wait for all tasks to complete (for parallel tasks)
+        concurrent.futures.wait(futures)
 
 
     #----------------------------- view 
